@@ -46,4 +46,8 @@ export class FileUploadComponent implements OnInit {
   onDownload(file: string) {
     window.location.href = `/api/files/download?fileName=${file}`;
   }
+
+  onDownloadABP(file: string) {
+    window.location.href = `/api/files/download-report?fileName=${file}`;
+  }
 }
