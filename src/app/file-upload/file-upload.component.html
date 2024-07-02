@@ -7,6 +7,7 @@
   <ul>
     <li *ngFor="let file of uploadedFiles">
       {{ file }}
+      <button (click)="onDownload(file)">Download</button>
     </li>
   </ul>
 </div>
