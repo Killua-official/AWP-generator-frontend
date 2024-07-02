@@ -42,4 +42,8 @@ export class FileUploadComponent implements OnInit {
         this.uploadedFiles = files;
       });
   }
+
+  onDownload(file: string) {
+    window.location.href = `/api/files/download?fileName=${file}`;
+  }
 }
