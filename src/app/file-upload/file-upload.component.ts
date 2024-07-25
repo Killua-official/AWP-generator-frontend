@@ -48,6 +48,8 @@ export class FileUploadComponent implements OnInit {
   }
 
   onDownloadABP(file: string) {
-    window.location.href = `/api/files/download-report?fileName=${file}`;
+    const salary = prompt("Enter your salary: ");
+
+    window.location.href = `/api/files/download-report?fileName=${file}&salary=${salary}`;
   }
 }
