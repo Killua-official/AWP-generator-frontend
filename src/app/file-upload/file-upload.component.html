@@ -1,14 +1,14 @@
 <div class="file-upload">
-  <h2>Upload a File</h2>
+  <h2>Загрузить файл</h2>
   <input type="file" (change)="onFileSelected($event)" />
-  <button (click)="onUpload()">Upload</button>
+  <button (click)="onUpload()">Загрузить</button>
 
-  <h2>Uploaded Files</h2>
+  <h2>Загруженные файлы</h2>
   <ul>
     <li *ngFor="let file of uploadedFiles">
       {{ file }}
-      <button (click)="onDownload(file)">Download</button>
-      <button (click)="onDownloadABP(file)">Download AWP</button>
+      <button (click)="onDownload(file)">Скачать</button>
+      <button (click)="onDownloadABP(file)">Скачать АВР</button>
     </li>
   </ul>
 </div>

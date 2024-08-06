@@ -48,7 +48,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   onDownloadABP(file: string) {
-    const salary = prompt("Enter your salary: ");
+    const salary = prompt("Введите вашу зарплату: ");
 
     window.location.href = `/api/files/download-report?fileName=${file}&salary=${salary}`;
   }
