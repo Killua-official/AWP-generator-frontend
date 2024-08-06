@@ -1,0 +1,33 @@
+<!-- src/app/modal-dialog/modal-dialog.component.html -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" [ngClass]="{'show': showModal}" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Введите данные</h5>
+
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="salary">Зарплата:</label>
+          <input type="text" class="form-control" id="salary" [(ngModel)]="salary">
+        </div>
+        <div class="form-group">
+          <label for="identificationNumber">ИИН:</label>
+          <input type="text" class="form-control" id="identificationNumber" [(ngModel)]="identificationNumber">
+        </div>
+        <div class="form-group">
+          <label for="documentNumber">Номер документа:</label>
+          <input type="text" class="form-control" id="documentNumber" [(ngModel)]="documentNumber">
+        </div>
+        <div class="form-group">
+          <label for="contractNumber">Номер договора:</label>
+          <input type="text" class="form-control" id="contractNumber" [(ngModel)]="contractNumber">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Закрыть</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Отправить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+<!-- src/app/file-upload/file-upload.component.html -->
 <div class="file-upload">
   <h2>Загрузить файл</h2>
   <input type="file" (change)="onFileSelected($event)" />
@@ -12,4 +13,6 @@
     </li>
   </ul>
 </div>
+
+<app-modal-dialog (submitData)="handleModalSubmit($event)"></app-modal-dialog>
 
