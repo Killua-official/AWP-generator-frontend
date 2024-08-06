@@ -1,10 +1,14 @@
 // src/app/modal-dialog/modal-dialog.component.ts
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: './modal-dialog.component.html',
-  styleUrls: ['./modal-dialog.component.css']
+  styleUrls: ['./modal-dialog.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class ModalDialogComponent {
   salary: string = '';
@@ -26,4 +30,8 @@ export class ModalDialogComponent {
       alert("Все поля должны быть заполнены!");
     }
   }
+  closeModal() {
+    this.showModal = false;
+  }
+  @Input() public showModal: boolean = false;
 }

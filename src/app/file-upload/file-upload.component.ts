@@ -1,8 +1,8 @@
 // src/app/file-upload/file-upload.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {NgForOf, NgIf} from "@angular/common";
-import { ModalDialogModule } from '../modal-dialog/modal-dialog.module';
+import { NgForOf, NgIf } from "@angular/common";
+import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -12,7 +12,7 @@ import { ModalDialogModule } from '../modal-dialog/modal-dialog.module';
   imports: [
     NgForOf,
     NgIf,
-    ModalDialogModule
+    ModalDialogComponent
   ]
 })
 export class FileUploadComponent implements OnInit {
@@ -21,7 +21,7 @@ export class FileUploadComponent implements OnInit {
   showModal: boolean = false;
   fileToDownload: string = '';
 
-  @ViewChild(ModalDialogModule) modalDialog!: ModalDialogModule;
+  @ViewChild(ModalDialogComponent) modalDialog!: ModalDialogComponent;
 
   constructor(private http: HttpClient) {}
 
@@ -58,6 +58,7 @@ export class FileUploadComponent implements OnInit {
   onDownloadABP(file: string) {
     this.fileToDownload = file;
     this.showModal = true;
+    this.modalDialog.showModal = true;
   }
 
   handleModalSubmit(data: { salary: string, identificationNumber: string, documentNumber: string, contractNumber: string }) {

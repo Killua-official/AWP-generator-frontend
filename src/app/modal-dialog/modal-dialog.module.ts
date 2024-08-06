@@ -9,4 +9,6 @@ import { ModalDialogComponent } from './modal-dialog.component';
   imports: [CommonModule, FormsModule, NgIf],
   exports: [ModalDialogComponent]
 })
-export class ModalDialogModule {}
+export class ModalDialogModule {
+  public component: ModalDialogComponent = new ModalDialogComponent();
+}
