@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+// src/app/file-upload/file-upload.component.ts
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
+import { ModalDialogModule } from '../modal-dialog/modal-dialog.module';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,12 +10,18 @@ import {NgForOf} from "@angular/common";
   styleUrls: ['./file-upload.component.css'],
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf,
+    ModalDialogModule
   ]
 })
 export class FileUploadComponent implements OnInit {
   selectedFile?: File;
   uploadedFiles: string[] = [];
+  showModal: boolean = false;
+  fileToDownload: string = '';
+
+  @ViewChild(ModalDialogModule) modalDialog!: ModalDialogModule;
 
   constructor(private http: HttpClient) {}
 
@@ -48,8 +56,12 @@ export class FileUploadComponent implements OnInit {
   }
 
   onDownloadABP(file: string) {
-    const salary = prompt("Введите вашу зарплату: ");
+    this.fileToDownload = file;
+    this.showModal = true;
+  }
 
-    window.location.href = `/api/files/download-report?fileName=${file}&salary=${salary}`;
+  handleModalSubmit(data: { salary: string, identificationNumber: string, documentNumber: string, contractNumber: string }) {
+    this.showModal = false;
+    window.location.href = `/api/files/download-report?fileName=${this.fileToDownload}&salary=${data.salary}&iin=${data.identificationNumber}&docNumber=${data.documentNumber}&contractNumber=${data.contractNumber}`;
   }
 }

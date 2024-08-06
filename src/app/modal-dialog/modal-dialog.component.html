@@ -1,0 +1,23 @@
+<!-- src/app/modal-dialog/modal-dialog.component.html -->
+<div class="modal">
+  <div class="modal-content">
+    <h2>Введите данные</h2>
+    <label>
+      Зарплата:
+      <input [(ngModel)]="salary" />
+    </label>
+    <label>
+      ИИН:
+      <input [(ngModel)]="identificationNumber" />
+    </label>
+    <label>
+      Номер документа:
+      <input [(ngModel)]="documentNumber" />
+    </label>
+    <label>
+      Номер договора:
+      <input [(ngModel)]="contractNumber" />
+    </label>
+    <button (click)="onSubmit()">Отправить</button>
+  </div>
+</div>
