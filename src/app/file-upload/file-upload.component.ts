@@ -1,4 +1,3 @@
-// src/app/file-upload/file-upload.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForOf, NgIf } from "@angular/common";
@@ -37,10 +36,16 @@ export class FileUploadComponent implements OnInit {
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile!, this.selectedFile!.name);
 
-    this.http.post('/api/files/upload', uploadData)
-      .subscribe(response => {
-        console.log(response);
-        this.fetchUploadedFiles();
+    this.http.post<any>('/api/files/upload', uploadData)
+      .subscribe({
+        next: response => {
+          this.fetchUploadedFiles()
+          console.log('Response:', response);
+        },
+        error: error => {
+          this.fetchUploadedFiles()
+          console.error('There was an error!', error);
+        }
       });
   }
 
