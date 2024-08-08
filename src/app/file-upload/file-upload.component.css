@@ -9,14 +9,3 @@
   margin-bottom: 10px;
 }
 
-.file-upload button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.file-upload button:hover {
-  background-color: #0056b3;
-}
