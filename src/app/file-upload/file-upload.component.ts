@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForOf, NgIf } from "@angular/common";
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-file-upload',
@@ -22,7 +23,7 @@ export class FileUploadComponent implements OnInit {
 
   @ViewChild(ModalDialogComponent) modalDialog!: ModalDialogComponent;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
     this.fetchUploadedFiles();
@@ -36,7 +37,7 @@ export class FileUploadComponent implements OnInit {
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile!, this.selectedFile!.name);
 
-    this.http.post<any>('/api/files/upload', uploadData)
+    this.http.post<any>('/api/files/upload', uploadData, { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
       .subscribe({
         next: response => {
           this.fetchUploadedFiles()
@@ -50,14 +51,14 @@ export class FileUploadComponent implements OnInit {
   }
 
   fetchUploadedFiles() {
-    this.http.get<string[]>('/api/files')
+    this.http.get<string[]>('/api/files', { headers: { Authorization: `Bearer ${this.authService.getToken()}` } })
       .subscribe(files => {
         this.uploadedFiles = files;
       });
   }
 
   onDownload(file: string) {
-    window.location.href = `/api/files/download?fileName=${file}`;
+    window.location.href = `/api/files/download?fileName=${file}&token=${this.authService.getToken()}`;
   }
 
   onDownloadABP(file: string) {
@@ -68,6 +69,6 @@ export class FileUploadComponent implements OnInit {
 
   handleModalSubmit(data: { salary: string, identificationNumber: string, documentNumber: string, contractNumber: string }) {
     this.showModal = false;
-    window.location.href = `/api/files/download-report?fileName=${this.fileToDownload}&salary=${data.salary}&iin=${data.identificationNumber}&docNumber=${data.documentNumber}&contractNumber=${data.contractNumber}`;
+    window.location.href = `/api/files/download-report?fileName=${this.fileToDownload}&salary=${data.salary}&iin=${data.identificationNumber}&docNumber=${data.documentNumber}&contractNumber=${data.contractNumber}&token=${this.authService.getToken()}`;
   }
 }

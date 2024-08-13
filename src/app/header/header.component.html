@@ -1,9 +1,10 @@
-<!-- src/app/header/header.component.html -->
 <div class="container-fluid bg-light">
   <header class="navbar container navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
       <img ngSrc="/assets/w_logo.png" alt="Logo" width="55" height="35">
     </a>
-    <button class="btn btn-success ms-auto">Выйти</button>
+    <button *ngIf="getCurrentRoute() === '/'" class="btn btn-success ms-auto" (click)="logout()">Выйти</button>
+    <button *ngIf="getCurrentRoute() === '/login'" class="btn btn-success ms-auto" (click)="navigateTo('/register')">Зарегистрироваться</button>
+    <button *ngIf="getCurrentRoute() === '/register'" class="btn btn-success ms-auto" (click)="navigateTo('/login')">Войти</button>
   </header>
 </div>
