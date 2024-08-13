@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgForOf, NgIf } from "@angular/common";
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import {AuthService} from "../auth/auth.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-file-upload',
@@ -23,7 +24,9 @@ export class FileUploadComponent implements OnInit {
 
   @ViewChild(ModalDialogComponent) modalDialog!: ModalDialogComponent;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, private titleService: Title) {
+    this.titleService.setTitle("Загрузка файлов");
+  }
 
   ngOnInit() {
     this.fetchUploadedFiles();
@@ -67,8 +70,8 @@ export class FileUploadComponent implements OnInit {
     this.modalDialog.showModal = true;
   }
 
-  handleModalSubmit(data: { salary: string, identificationNumber: string, documentNumber: string, contractNumber: string }) {
+  handleModalSubmit(data: { salary: string, identificationNumber: string, documentNumber: string, contractNumber: string, performer: string }) {
     this.showModal = false;
-    window.location.href = `/api/files/download-report?fileName=${this.fileToDownload}&salary=${data.salary}&iin=${data.identificationNumber}&docNumber=${data.documentNumber}&contractNumber=${data.contractNumber}&token=${this.authService.getToken()}`;
+    window.location.href = `/api/files/download-report?fileName=${this.fileToDownload}&salary=${data.salary}&iin=${data.identificationNumber}&docNumber=${data.documentNumber}&contractNumber=${data.contractNumber}&token=${this.authService.getToken()}&performer=${data.performer}`;
   }
 }
