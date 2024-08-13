@@ -14,14 +14,18 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  login(username: string, password: string): void {
+  login(username: string, password: string, errorCallback: () => void): void {
     localStorage.setItem('token', 'your-jwt-token');
     this.http.post<any>('/api/auth/login', {username, password}).subscribe((response) => {
       if (response && response.token) {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/']).then();
       }
-    });
+      else {
+        errorCallback();
+      }
+    },
+      errorCallback);
   }
 
   logout(): void {
